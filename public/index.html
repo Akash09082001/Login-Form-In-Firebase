@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="flex items-center justify-center flex-col gap-10 h-screen ">
+
+        <h1 class="flex text-3xl font-bold">Login Form</h1>
+        
+        <form action="" id="loginForm" class="flex flex-col w-fit mx-auto gap-5">
+            <input type="text" id="name" class="flex rounded-md pl-5 py-2 text-base border border-gray-300 " required placeholder="full name">
+            <input type="password" id="password" class="flex rounded-md pl-5 py-2 text-base border border-gray-300 " required placeholder="passward">
+            <input type="button" id="submit" value="submit" class="flex bg-black px-5 py-2 text-white items-center justify-center rounded-md">
+        </form>
+        
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
+        import { getDatabase, ref, set, get , child } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-database.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyA1WNsb_K_Jj_nuPPbpZSeuWTgChkpoZSg",
+        authDomain: "login-form-2211b.firebaseapp.com",
+        projectId: "login-form-2211b",
+        storageBucket: "login-form-2211b.appspot.com",
+        messagingSenderId: "230178625784",
+        appId: "1:230178625784:web:51e9718b74c0dc74dcc30d"
+        };
+
+        const app = initializeApp(firebaseConfig);
+
+        const db = getDatabase(app);
+
+
+        document.getElementById("submit").addEventListener('click',  function(e){
+            e.preventDefault();
+            set(ref(db, 'user/' + document.getElementById("name").value),{
+                name: document.getElementById("name").value,
+                password: document.getElementById("password").value
+            });
+            console.log("login successfully");
+        });
+
+    </script>
+
+
+</body>
+</html>
